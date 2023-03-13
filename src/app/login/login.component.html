@@ -1,0 +1,35 @@
+<div class="container">
+  <nav class="nav">
+    <div class="nav-left">
+      <h3>Login</h3>
+    </div>
+  </nav>
+  <div class="loginForm">
+    <form [formGroup]="loginForm" (ngSubmit)="submitForm()">
+      <label class="form-label">User Name</label>
+      <br />
+      <input
+        type="text"
+        class="d-block mb-2 form-control"
+        formControlName="userName"
+        [ngClass]="{'isValid':loginForm.get('userName')?.errors?.['invalidUsername'] && loginForm.get('userName')?.dirty && loginForm.get('userName')?.touched }"
+      />
+      <div class="text-end">
+        <button
+          [ngClass]="{ btnDisabled: !loginForm.valid }"
+          type="submit"
+          class="btnCustom mb-2"
+        >
+          Log In
+        </button>
+      </div>
+
+      <p
+        class="text-danger loginError"
+        *ngIf="loginForm.get('userName')?.errors?.['invalidUsername']&& loginForm.get('userName')?.dirty && loginForm.get('userName')?.touched "
+      >
+        Not a valid user name!
+      </p>
+    </form>
+  </div>
+</div>

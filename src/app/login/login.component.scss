@@ -1,0 +1,25 @@
+.loginForm {
+  height: 60vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  .isValid {
+    border: 2px solid red !important;
+  }
+  input {
+    width: 250px;
+  }
+  label {
+    font-weight: 500;
+  }
+
+  .form-control {
+    box-shadow: none;
+  }
+  .loginError {
+    position: absolute;
+    font-weight: bold;
+    width: 200px;
+  }
+}

@@ -1,0 +1,29 @@
+.postForm {
+  .isValid {
+    border: 2px solid red !important;
+  }
+  label {
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+  }
+
+  input {
+    width: 100%;
+    margin-bottom: 0.5rem;
+  }
+  textarea {
+    width: 100%;
+    margin-bottom: 0.5rem;
+  }
+
+  .btnPost {
+    display: flex;
+    justify-content: end;
+    gap: 15px;
+  }
+}
+.router {
+  color: #0864ec;
+  text-decoration: underline;
+  cursor: pointer;
+}

@@ -1,0 +1,43 @@
+<div class="container">
+  <nav class="nav mb-5">
+    <div class="nav-left">
+      <h3>New Post</h3>
+      <a class="router" (click)="cancel()">Go back to Home page</a>
+    </div>
+    <div class="nav-right">
+      <p>Welcome {{ title }}!</p>
+    </div>
+  </nav>
+</div>
+<div class="container">
+  <form class="postForm" [formGroup]="newPostForm" (ngSubmit)="submitForm()">
+    <div class="form-group">
+      <label>Title</label>
+      <br />
+      <input
+        formControlName="postTitle"
+        #titleData
+        (input)="onInputChange(titleData.value, messageData.value)"
+        type="text"
+        [ngClass]="{'isValid':newPostForm.get('postTitle')?.errors?.['maxlength'] && newPostForm.get('postTitle')?.dirty && newPostForm.get('postTitle')?.touched }"
+      />
+    </div>
+    <div class="form-group">
+      <label>Message</label>
+      <br />
+      <textarea formControlName="postMessage" cols="30" rows="5"></textarea>
+    </div>
+    <div class="btnPost">
+      <button
+        type="submit"
+        #messageData
+        (input)="onInputChange(titleData.value, messageData.value)"
+        [ngClass]="{ btnDisabled: !newPostForm.valid }"
+        class="btnCustom"
+      >
+        Save
+      </button>
+      <a class="btnCustom" (click)="cancel()">Cancel</a>
+    </div>
+  </form>
+</div>

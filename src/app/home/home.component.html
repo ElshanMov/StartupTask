@@ -1,0 +1,74 @@
+<div class="container">
+  <nav class="nav">
+    <div class="nav-left">
+      <h3>Home</h3>
+    </div>
+    <div *ngIf="loginUser; else notLogin" class="nav-right">
+      <p>Welcome, {{ loginUser }}</p>
+      <a class="btnCustom" routerLink="/newpost"> New Post </a>
+      <a class="btnCustom" (click)="logOut()"> Log Out </a>
+    </div>
+    <ng-template #notLogin>
+      <div class="nav-right">
+        <p>You are not logged in</p>
+        <a class="btnCustom" routerLink="/login"> Log In </a>
+      </div>
+    </ng-template>
+  </nav>
+  <div [ngSwitch]="status">
+    <h4 class="scsMsg" *ngSwitchCase="'added'">
+      A new post was saved successfully
+    </h4>
+    <h4 class="scsMsg" *ngSwitchCase="'edit'">Post was updated successfully</h4>
+    <h4 class="scsMsg" *ngSwitchCase="'delete'">
+      Post was deleted successfully
+    </h4>
+  </div>
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th scope="col">User</th>
+        <th scope="col">Post</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let dt of displayedUsers">
+        <td style="width: 150px">
+          <p>{{ userData[dt.userId - 1].name }}</p>
+          <a href="#">{{ userData[dt.userId - 1].company.name }}</a>
+        </td>
+        <td>
+          <a
+            style="word-break: break-all"
+            routerLink="/editpost"
+            class="postLink"
+            (click)="onInputChange(dt.id)"
+            *ngIf="userData[dt.userId - 1].name === loginUser; else otherUser"
+            >{{ dt.title }}</a
+          >
+          <ng-template #otherUser>
+            <h4>{{ dt.title }}</h4>
+          </ng-template>
+          <p style="font-size: 14px">{{ dt.body }}</p>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="pagination-box">
+    <div
+      class="pagination d-flex"
+      style="justify-content: space-between; width: 80px"
+    >
+      <div
+        class="arrow-left"
+        [ngClass]="{ arrowDisabledLeft: currentPage == 1 }"
+        (click)="goToPage(currentPage - 1)"
+      ></div>
+      <div
+        class="arrow-right"
+        [ngClass]="{ arrowDisabledRight: currentPage === totalPages }"
+        (click)="goToPage(currentPage + 1)"
+      ></div>
+    </div>
+  </div>
+</div>
